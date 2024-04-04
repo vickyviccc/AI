@@ -11,21 +11,24 @@
     <h1>Welcome to my joke generator</h1>
 
     <button id="joke">Tell me a joke</button>
+    <div id="display"></div>
 
     <script>
-      function handleClick(response) {
+      function displayJoke(response) {
         alert(response.data.answer);
+      }
+      function handleClick(event) {
+        event.preventDefault();
+        let apiKey = "ob013544229b2c6b3ft9f43ac4050481";
+        let context = "be polite and tell short jokes";
+        let prompt = "Tell me jokes about dogs";
+        let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
+
+        axios.get(apiUrl).then(displayJoke);
       }
 
       let buttonElement = document.querySelector("#joke");
       buttonElement.addEventListener("click", handleClick);
-
-      let apiKey = "ob013544229b2c6b3ft9f43ac4050481";
-      let context = "be polite and tell short jokes";
-      let prompt = "Tell me jokes about dogs";
-      let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
-
-      axios.get(apiUrl).then(handleClick);
     </script>
   </body>
 </html>
